@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nafilme Studio</title>
+<meta name="description" content="Nafilme Studio — independent studio of short AI-assisted series, kids cartoons and tech videos.">
+<link rel="icon" href="icon.png">
+<style>
+  :root { --bg:#0e0f13; --fg:#f2f2f4; --muted:#a4a7b1; --accent:#ffcf3f; --card:#181a21; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:17px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; background:var(--bg); color:var(--fg); }
+  main { max-width:860px; margin:0 auto; padding:56px 16px 40px; }
+  header { display:flex; align-items:center; gap:16px; margin-bottom:28px; }
+  header img { width:64px; height:64px; border-radius:14px; }
+  h1 { font-size:38px; margin:0; letter-spacing:-0.5px; }
+  .lead { color:var(--muted); font-size:19px; margin:0 0 36px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
+  .card { background:var(--card); border-radius:14px; padding:18px 20px; }
+  .card h2 { font-size:18px; margin:0 0 6px; color:var(--accent); }
+  .card p { margin:0; color:var(--muted); font-size:15px; }
+  section { margin-top:40px; }
+  h3 { font-size:20px; margin:0 0 10px; }
+  p, li { color:#d6d8de; }
+  footer { margin-top:56px; padding-top:20px; border-top:1px solid #262833; color:var(--muted); font-size:14px; }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="icon.png" alt="Nafilme Studio logo">
+    <h1>Nafilme Studio</h1>
+  </header>
+  <p class="lead">Независимая студия коротких сериалов, детских 3D-мультиков с песнями и роликов о технологиях.
+    Сценарии пишет команда студии, изображение, видео и голоса создаются с помощью ИИ-инструментов.<br>
+    <span lang="en">Independent studio of short series, kids 3D song cartoons and tech videos, made with AI-assisted tools.</span></p>
+
+  <div class="grid">
+    <div class="card"><h2>NaFilme</h2><p>Короткие сериалы: драма, мистика, сказки.</p></div>
+    <div class="card"><h2>NaMultfilmeHub</h2><p>«Колёсово» — добрые мультики-песенки для малышей про машинок.</p></div>
+    <div class="card"><h2>NaFilmeHub</h2><p>Компьютеры, железо и сборки — понятно и честно.</p></div>
+    <div class="card"><h2>Web Stream</h2><p>ИИ, агенты, сайты и боты — коротко с ведущим.</p></div>
+  </div>
+
+  <section>
+    <h3>Что делает приложение Nafilme Studio</h3>
+    <p>Nafilme Studio — внутренняя программа студии, которая работает на компьютере студии. Через вход Google она
+      получает доступ только к YouTube-каналам самой студии, чтобы загружать на них готовые серии
+      (YouTube Data API: загрузка видео и чтение статистики своих каналов). Приложение не используется посторонними
+      людьми и не получает доступ к чужим каналам.</p>
+    <p lang="en">Nafilme Studio is the studio's own desktop tool. It uses Google sign-in only to upload finished episodes
+      to the studio's own YouTube channels and to read their statistics (YouTube Data API v3). It is not offered to
+      third parties.</p>
+  </section>
+
+  <footer>
+    <a href="privacy.html">Политика конфиденциальности / Privacy Policy</a> ·
+    <a href="terms.html">Условия использования / Terms of Service</a> ·
+    Контакт: <a href="mailto:tatarinaleks666@gmail.com">tatarinaleks666@gmail.com</a><br>
+    © 2026 Nafilme Studio
+  </footer>
+</main>
+</body>
+</html>
