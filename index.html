@@ -1,65 +1,243 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nafilme Studio</title>
-<meta name="description" content="Nafilme Studio — independent studio of short AI-assisted series, kids cartoons and tech videos.">
+<meta name="description" content="Nafilme Studio — независимая студия коротких сериалов, детских 3D-мультиков с песнями и роликов о технологиях.">
+<meta property="og:title" content="Nafilme Studio">
+<meta property="og:description" content="Сериалы, мультики-песенки и технологии — истории, которые оживают.">
+<meta property="og:image" content="https://arbatbrat7.github.io/kids.jpg">
 <link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#0e0f13; --fg:#f2f2f4; --muted:#a4a7b1; --accent:#ffcf3f; --card:#181a21; }
-  * { box-sizing:border-box; }
-  body { margin:0; font:17px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; background:var(--bg); color:var(--fg); }
-  main { max-width:860px; margin:0 auto; padding:56px 16px 40px; }
-  header { display:flex; align-items:center; gap:16px; margin-bottom:28px; }
-  header img { width:64px; height:64px; border-radius:14px; }
-  h1 { font-size:38px; margin:0; letter-spacing:-0.5px; }
-  .lead { color:var(--muted); font-size:19px; margin:0 0 36px; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
-  .card { background:var(--card); border-radius:14px; padding:18px 20px; }
-  .card h2 { font-size:18px; margin:0 0 6px; color:var(--accent); }
-  .card p { margin:0; color:var(--muted); font-size:15px; }
-  section { margin-top:40px; }
-  h3 { font-size:20px; margin:0 0 10px; }
-  p, li { color:#d6d8de; }
-  footer { margin-top:56px; padding-top:20px; border-top:1px solid #262833; color:var(--muted); font-size:14px; }
-  a { color:var(--accent); }
+  :root {
+    --bg: #0b0c10; --bg2: #12141b; --fg: #f4f4f6; --muted: #a3a7b3; --line: #232633;
+    --gold: #ffcf3f; --red: #ff5a4e; --sky: #5ec8ff; --mint: #7cf0c5;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--fg); font: 17px/1.6 Manrope, system-ui, sans-serif; overflow-x: hidden; }
+  a { color: var(--gold); text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 16px; }
+
+  /* шапка */
+  nav { position: fixed; inset: 0 0 auto; z-index: 20; backdrop-filter: blur(14px); background: rgba(11,12,16,.62);
+        border-bottom: 1px solid transparent; transition: border-color .3s; }
+  nav.scrolled { border-color: var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 10px; font: 700 18px Unbounded, sans-serif; color: var(--fg); }
+  .logo img { width: 34px; height: 34px; border-radius: 9px; }
+  nav ul { display: flex; gap: 26px; list-style: none; padding: 0; }
+  nav ul a { color: var(--muted); font-weight: 500; transition: color .2s; }
+  nav ul a:hover { color: var(--fg); }
+  @media (max-width: 720px) { nav ul { display: none; } }
+
+  /* первый экран */
+  .hero { position: relative; min-height: 100vh; display: grid; place-items: center; text-align: center; overflow: hidden; padding: 110px 0 70px; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .55; animation: drift 18s ease-in-out infinite alternate; }
+  .b1 { width: 520px; height: 520px; background: #ff5a4e; top: -140px; left: -120px; }
+  .b2 { width: 460px; height: 460px; background: #3d6bff; bottom: -160px; right: -100px; animation-delay: -6s; }
+  .b3 { width: 340px; height: 340px; background: #ffcf3f; top: 40%; left: 55%; opacity: .28; animation-delay: -11s; }
+  @keyframes drift { to { transform: translate(80px, 60px) scale(1.15); } }
+  .grain { position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+           background-size: 3px 3px; mix-blend-mode: overlay; pointer-events: none; }
+  .hero-inner { position: relative; z-index: 2; }
+  .tag { display: inline-flex; gap: 8px; align-items: center; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px;
+         color: var(--muted); font-size: 14px; background: rgba(255,255,255,.03); }
+  .tag i { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 12px var(--mint); animation: pulse 1.8s infinite; }
+  @keyframes pulse { 50% { opacity: .35; } }
+  h1 { font: 800 clamp(44px, 9vw, 112px)/.95 Unbounded, sans-serif; letter-spacing: -2px; margin: 26px 0 22px; }
+  h1 span { background: linear-gradient(90deg, var(--gold), var(--red), var(--sky), var(--gold)); background-size: 300% 100%;
+            -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 8s linear infinite; }
+  @keyframes shine { to { background-position: 300% 0; } }
+  .lead { max-width: 640px; margin: 0 auto; color: var(--muted); font-size: clamp(17px, 2.2vw, 21px); }
+  .cta { display: flex; gap: 12px; justify-content: center; margin-top: 34px; flex-wrap: wrap; }
+  .btn { padding: 14px 24px; border-radius: 14px; font-weight: 700; transition: transform .2s, box-shadow .2s; }
+  .btn.main { background: var(--gold); color: #1a1405; box-shadow: 0 10px 30px rgba(255,207,63,.25); }
+  .btn.ghost { border: 1px solid var(--line); color: var(--fg); }
+  .btn:hover { transform: translateY(-3px); }
+
+  /* герои летают по первому экрану */
+  .floaters img { position: absolute; width: clamp(80px, 11vw, 150px); border-radius: 26px; z-index: 1;
+                  box-shadow: 0 20px 50px rgba(0,0,0,.45); animation: bob 6s ease-in-out infinite; }
+  .floaters img:nth-child(1) { left: 6%; top: 24%; animation-delay: 0s; }
+  .floaters img:nth-child(2) { right: 7%; top: 20%; animation-delay: -1.5s; }
+  .floaters img:nth-child(3) { left: 11%; bottom: 14%; animation-delay: -3s; }
+  .floaters img:nth-child(4) { right: 12%; bottom: 12%; animation-delay: -4.5s; }
+  @keyframes bob { 50% { transform: translateY(-18px) rotate(-3deg); } }
+  @media (max-width: 720px) { .floaters img:nth-child(n+3) { display: none; } .floaters img { top: auto !important; bottom: 4% !important; } }
+
+  /* бегущая лента кадров */
+  .marquee { overflow: hidden; border-block: 1px solid var(--line); background: var(--bg2); padding: 18px 0; }
+  .track { display: flex; gap: 14px; width: max-content; animation: run 40s linear infinite; }
+  .track img { height: 150px; width: 266px; object-fit: cover; border-radius: 12px; }
+  @keyframes run { to { transform: translateX(-50%); } }
+
+  section { padding: 100px 0; }
+  .kicker { color: var(--gold); font: 700 13px Unbounded, sans-serif; letter-spacing: 2px; text-transform: uppercase; }
+  h2 { font: 700 clamp(30px, 5vw, 52px)/1.05 Unbounded, sans-serif; margin: 12px 0 18px; letter-spacing: -1px; }
+  .sub { color: var(--muted); max-width: 620px; }
+
+  /* каналы */
+  .channels { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; margin-top: 46px; }
+  .card { position: relative; border-radius: 22px; overflow: hidden; background: var(--bg2); border: 1px solid var(--line);
+          transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .3s; transform-style: preserve-3d; }
+  .card:hover { border-color: #3a3e50; }
+  .card .pic { aspect-ratio: 4/5; overflow: hidden; }
+  .card .pic img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s; }
+  .card:hover .pic img { transform: scale(1.07); }
+  .card .info { position: absolute; inset: auto 0 0; padding: 22px; background: linear-gradient(transparent, rgba(8,9,12,.92) 45%); }
+  .card h3 { font: 700 21px Unbounded, sans-serif; }
+  .card p { color: #c9ccd5; font-size: 15px; margin-top: 4px; }
+  .pill { display: inline-block; margin-bottom: 10px; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+
+  /* Колёсово */
+  .kids { background: radial-gradient(1200px 500px at 50% 0%, rgba(94,200,255,.12), transparent 70%); }
+  .kids-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 40px; align-items: center; margin-top: 30px; }
+  @media (max-width: 860px) { .kids-grid { grid-template-columns: 1fr; } }
+  .kids-shot { border-radius: 24px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+  .cast { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 26px; }
+  .cast figure { text-align: center; }
+  .cast img { border-radius: 18px; background: #fff7e0; transition: transform .3s; }
+  .cast figure:hover img { transform: translateY(-8px) rotate(-4deg); }
+  .cast figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+  /* как мы работаем */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 44px; counter-reset: s; }
+  .step { padding: 24px; border-radius: 18px; background: var(--bg2); border: 1px solid var(--line); counter-increment: s; }
+  .step::before { content: "0" counter(s); font: 800 30px Unbounded, sans-serif; color: transparent; -webkit-text-stroke: 1px var(--gold); }
+  .step h4 { font: 700 17px Unbounded, sans-serif; margin: 10px 0 6px; }
+  .step p { color: var(--muted); font-size: 15px; }
+
+  .about { border-top: 1px solid var(--line); }
+  .about p { color: #d4d6dd; max-width: 820px; margin-top: 14px; }
+  footer { padding: 40px 0 60px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  /* появление при прокрутке */
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.8,.2,1); }
+  .reveal.on { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
 </style>
 </head>
 <body>
-<main>
-  <header>
-    <img src="icon.png" alt="Nafilme Studio logo">
-    <h1>Nafilme Studio</h1>
-  </header>
-  <p class="lead">Независимая студия коротких сериалов, детских 3D-мультиков с песнями и роликов о технологиях.
-    Сценарии пишет команда студии, изображение, видео и голоса создаются с помощью ИИ-инструментов.<br>
-    <span lang="en">Independent studio of short series, kids 3D song cartoons and tech videos, made with AI-assisted tools.</span></p>
+<nav id="nav"><div class="wrap">
+  <a class="logo" href="#"><img src="icon.png" alt="">Nafilme</a>
+  <ul><li><a href="#channels">Каналы</a></li><li><a href="#kids">Колёсово</a></li><li><a href="#how">Как мы работаем</a></li><li><a href="#about">О приложении</a></li></ul>
+</div></nav>
 
-  <div class="grid">
-    <div class="card"><h2>NaFilme</h2><p>Короткие сериалы: драма, мистика, сказки.</p></div>
-    <div class="card"><h2>NaMultfilmeHub</h2><p>«Колёсово» — добрые мультики-песенки для малышей про машинок.</p></div>
-    <div class="card"><h2>NaFilmeHub</h2><p>Компьютеры, железо и сборки — понятно и честно.</p></div>
-    <div class="card"><h2>Web Stream</h2><p>ИИ, агенты, сайты и боты — коротко с ведущим.</p></div>
+<header class="hero">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="grain"></div>
+  <div class="floaters" aria-hidden="true">
+    <img src="leon.jpg" alt=""><img src="migay.jpg" alt=""><img src="bubon.jpg" alt=""><img src="tisha.jpg" alt="">
   </div>
+  <div class="hero-inner wrap">
+    <span class="tag"><i></i> Независимая студия · 2026</span>
+    <h1>Истории,<br>которые <span>оживают</span></h1>
+    <p class="lead">Короткие сериалы, добрые 3D-мультики с песнями и честно о технологиях.
+      Сценарии пишет команда студии, картинку, движение и голоса помогают создавать ИИ-инструменты.</p>
+    <div class="cta"><a class="btn main" href="#channels">Смотреть каналы</a><a class="btn ghost" href="#kids">Мультики для малышей</a></div>
+  </div>
+</header>
 
-  <section>
-    <h3>Что делает приложение Nafilme Studio</h3>
-    <p>Nafilme Studio — внутренняя программа студии, которая работает на компьютере студии. Через вход Google она
-      получает доступ только к YouTube-каналам самой студии, чтобы загружать на них готовые серии
-      (YouTube Data API: загрузка видео и чтение статистики своих каналов). Приложение не используется посторонними
-      людьми и не получает доступ к чужим каналам.</p>
-    <p lang="en">Nafilme Studio is the studio's own desktop tool. It uses Google sign-in only to upload finished episodes
-      to the studio's own YouTube channels and to read their statistics (YouTube Data API v3). It is not offered to
-      third parties.</p>
-  </section>
+<div class="marquee" aria-hidden="true"><div class="track" id="track">
+  <img src="kids.jpg" alt=""><img src="golos.jpg" alt=""><img src="shagi.jpg" alt=""><img src="tech.jpg" alt="">
+  <img src="saltan.jpg" alt=""><img src="hub.jpg" alt="">
+</div></div>
 
-  <footer>
-    <a href="privacy.html">Политика конфиденциальности / Privacy Policy</a> ·
-    <a href="terms.html">Условия использования / Terms of Service</a> ·
-    Контакт: <a href="mailto:tatarinaleks666@gmail.com">tatarinaleks666@gmail.com</a><br>
-    © 2026 Nafilme Studio
-  </footer>
-</main>
+<section id="channels"><div class="wrap">
+  <div class="reveal"><div class="kicker">Каналы</div><h2>Четыре мира — одна студия</h2>
+    <p class="sub">Каждый канал — свой формат и свои постоянные герои. Новые серии выходят каждую неделю.</p></div>
+  <div class="channels">
+    <article class="card reveal tilt"><div class="pic"><img src="golos.jpg" alt="Кадр из сериала «Голос стаи»" loading="lazy"></div>
+      <div class="info"><span class="pill" style="background:#ff5a4e33;color:#ff8a80">Сериалы</span><h3>NaFilme</h3><p>Мистика, драма и сказки в коротких сериях.</p></div></article>
+    <article class="card reveal tilt"><div class="pic"><img src="kids.jpg" alt="Кадр из мультфильма «Колёсово»" loading="lazy"></div>
+      <div class="info"><span class="pill" style="background:#5ec8ff33;color:#8fdcff">Для детей</span><h3>NaMultfilmeHub</h3><p>«Колёсово» — мультики-песенки про машинок.</p></div></article>
+    <article class="card reveal tilt"><div class="pic"><img src="hub.jpg" alt="Обложка канала NaFilmeHub" loading="lazy"></div>
+      <div class="info"><span class="pill" style="background:#7cf0c533;color:#9ff5d6">Железо</span><h3>NaFilmeHub</h3><p>Компьютеры, сборки и комплектующие — понятно.</p></div></article>
+    <article class="card reveal tilt"><div class="pic"><img src="tech.jpg" alt="Ведущий Web Stream" loading="lazy"></div>
+      <div class="info"><span class="pill" style="background:#ffcf3f33;color:#ffdc72">Технологии</span><h3>Web Stream</h3><p>ИИ, агенты, сайты и боты — коротко с ведущим.</p></div></article>
+  </div>
+</div></section>
+
+<section id="kids" class="kids"><div class="wrap">
+  <div class="reveal"><div class="kicker">Мультсериал</div><h2>Колёсово</h2>
+    <p class="sub">Солнечный городок, где живут говорящие машинки. Каждая серия — маленькая добрая история и новая песенка,
+      которая учит малыша простому: цвета, счёт, правила дороги, вежливость.</p></div>
+  <div class="kids-grid">
+    <div class="kids-shot reveal"><img src="kids.jpg" alt="Леон и Светофорчик Мигай на перекрёстке" loading="lazy"></div>
+    <div class="reveal">
+      <h3 style="font:700 22px Unbounded,sans-serif">Знакомьтесь с героями</h3>
+      <div class="cast">
+        <figure><img src="leon.jpg" alt="Леон" loading="lazy"><figcaption>Леон</figcaption></figure>
+        <figure><img src="bubon.jpg" alt="Бубон" loading="lazy"><figcaption>Бубон</figcaption></figure>
+        <figure><img src="tisha.jpg" alt="Тиша" loading="lazy"><figcaption>Тиша</figcaption></figure>
+        <figure><img src="fyrk.jpg" alt="Дедушка Фырк" loading="lazy"><figcaption>Фырк</figcaption></figure>
+        <figure><img src="migay.jpg" alt="Светофорчик Мигай" loading="lazy"><figcaption>Мигай</figcaption></figure>
+      </div>
+      <p class="sub" style="margin-top:20px">Без страшилок и злодеев — только «проблема дня», которую друзья решают вместе.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <div class="reveal"><div class="kicker">Как мы работаем</div><h2>Команда студии</h2></div>
+  <div class="steps">
+    <div class="step reveal"><h4>Сценарист</h4><p>Пишет серию по библии сериала: герои, мир, правила.</p></div>
+    <div class="step reveal"><h4>Режиссёр</h4><p>Проверяет крючок, темп, диалоги и логику кадров.</p></div>
+    <div class="step reveal"><h4>Художник и аниматор</h4><p>Кадры, движение и голоса — с помощью ИИ-инструментов.</p></div>
+    <div class="step reveal"><h4>Монтажёр</h4><p>Собирает серию и проверяет звук и качество.</p></div>
+    <div class="step reveal"><h4>Контент-менеджер</h4><p>Смотрит, что нравится зрителям, и планирует следующие серии.</p></div>
+  </div>
+</div></section>
+
+<section id="about" class="about"><div class="wrap reveal">
+  <div class="kicker">О приложении Nafilme Studio</div>
+  <h2 style="font-size:clamp(24px,3.4vw,34px)">Что делает наше приложение</h2>
+  <p>Nafilme Studio — внутренняя программа студии, которая работает на компьютере студии. Через вход Google она получает
+    доступ только к YouTube-каналам самой студии, чтобы загружать на них готовые серии и читать их статистику
+    (YouTube Data API v3). Приложение не предлагается посторонним людям и не получает доступ к чужим каналам или данным.</p>
+  <p lang="en">Nafilme Studio is the studio's own desktop tool. It uses Google sign-in only to upload finished episodes to
+    the studio's own YouTube channels and to read their statistics (YouTube Data API v3). It is not offered to third parties.</p>
+</div></section>
+
+<footer><div class="wrap">
+  <span>© 2026 Nafilme Studio</span>
+  <span><a href="privacy.html">Политика конфиденциальности / Privacy Policy</a> · <a href="terms.html">Условия / Terms</a> ·
+    <a href="mailto:tatarinaleks666@gmail.com">tatarinaleks666@gmail.com</a></span>
+</div></footer>
+
+<script>
+  // лента кадров бесконечная: дублируем содержимое
+  const track = document.getElementById('track');
+  track.innerHTML += track.innerHTML;
+
+  // шапка с линией после прокрутки
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20), { passive: true });
+
+  // появление блоков при прокрутке
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }),
+                                      { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 90 + 'ms'; io.observe(el); });
+
+  // лёгкий 3D-наклон карточек за курсором
+  if (matchMedia('(hover: hover)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.tilt').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+        card.style.transform = `perspective(900px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', () => card.style.transform = '');
+    });
+  }
+</script>
 </body>
 </html>
